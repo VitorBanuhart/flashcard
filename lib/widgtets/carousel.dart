@@ -1,3 +1,4 @@
+import 'package:flashcard/widgtets/cards.dart';
 import 'package:flutter/material.dart';
 
 // 1. O Carousel agora é um StatefulWidget independente
@@ -28,7 +29,7 @@ class _CarouselState extends State<Carousel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 400.0,
+      height: 600.0,
       child: PageView.builder(
         controller: _pageController,
         itemBuilder: (context, index) {
@@ -55,19 +56,7 @@ class _CarouselState extends State<Carousel> {
                 child: Transform.scale(scale: scale, child: child),
               );
             },
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 0.80),
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: Center(
-                child: Text(
-                  'text ${realIndex + 1}',
-                  style: const TextStyle(fontSize: 16.0),
-                ),
-              ),
-            ),
+            child: Cards(),
           );
         },
       ),
