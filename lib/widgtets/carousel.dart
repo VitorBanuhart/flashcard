@@ -11,11 +11,12 @@ class Carousel extends StatefulWidget {
 // 2. Aqui fica o Estado (lógica e design) exclusivo do Carousel
 class _CarouselState extends State<Carousel> {
   late PageController _pageController;
+  final int _quantidadeDeCards = 5;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.65);
+    _pageController = PageController(viewportFraction: 0.65, initialPage: 1000);
   }
 
   @override
@@ -30,8 +31,9 @@ class _CarouselState extends State<Carousel> {
       height: 400.0,
       child: PageView.builder(
         controller: _pageController,
-        itemCount: 5,
         itemBuilder: (context, index) {
+          int realIndex = index % _quantidadeDeCards;
+
           return AnimatedBuilder(
             animation: _pageController,
             builder: (context, child) {
@@ -40,7 +42,7 @@ class _CarouselState extends State<Carousel> {
               if (_pageController.position.haveDimensions) {
                 pageOffset = _pageController.page! - index;
               } else {
-                pageOffset = (0.0 - index);
+                pageOffset = (1000.0 - index);
               }
 
               double scale = (1 - (pageOffset.abs() * 0.35)).clamp(0.0, 1.0);
@@ -61,7 +63,7 @@ class _CarouselState extends State<Carousel> {
               ),
               child: Center(
                 child: Text(
-                  'text ${index + 1}',
+                  'text ${realIndex + 1}',
                   style: const TextStyle(fontSize: 16.0),
                 ),
               ),
